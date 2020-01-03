@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'followed_users/create'
   get 'shouts/create'
   get 'dashboards/show'
   constraints Clearance::Constraints::SignedIn.new do
@@ -17,6 +18,10 @@ Rails.application.routes.draw do
   resource :session, only: [:create]
 
   resources :users, only: [:create, :show] do
+    member do 
+      post "follow" => "followed_users#create"
+      delete "unfollow" => "followed_users#destroy"
+    end
     resource :password,
       controller: "clearance/passwords",
       only: [:edit, :update]
