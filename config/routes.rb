@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/show'
   get 'hashtags_controller/show'
   get 'followed_users/create'
   get 'shouts/create'
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   post "text_shouts" => "shouts#create", defaults: { content_type: TextShout}
   post "photo_shouts" => "shouts#create", defaults: { content_type: PhotoShout}
 
+  resource :search, only: [:show]
 
   resources :shouts, only: [:show] do
     member do
