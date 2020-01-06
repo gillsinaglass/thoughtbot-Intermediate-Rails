@@ -16,7 +16,7 @@ class ShoutSearchQuery
         Shout.where(content_type: "TextShout", content_id: matching_text_shouts.select(:id))
     end
     def matching_text_shouts
-        TextShout.where("body LIKE ?", "%#{term}")
+        TextShout.where("body LIKE ?", "%#{term}%")
     end
 
     def matching_shouts_for_photo_shouts
