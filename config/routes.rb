@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'hashtags_controller/show'
   get 'followed_users/create'
   get 'shouts/create'
   get 'dashboards/show'
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   root to: "homes#show"
-  
+
   post "text_shouts" => "shouts#create", defaults: { content_type: TextShout}
   post "photo_shouts" => "shouts#create", defaults: { content_type: PhotoShout}
 
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
       delete "unlike" => "likes#destroy"
     end
   end
+
+  resources :hashtags, only:[:show]
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, only: [:create]
